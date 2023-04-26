@@ -1,0 +1,55 @@
+﻿@{
+    this.ViewData["Title"] = "Posts";
+}
+
+<h2>Hi @Context.Session.GetString("CurrentUser"),</h2>
+<h3>Welcome to our Forum</h3>
+
+@model IEnumerable<Post>
+
+
+<h2>Posts</h2>
+
+<div>
+    @*<a href="/Posts/Create" class="btn btn-primary">Create Post</a>*@
+    <a asp-controller="Posts" asp-action="Create" class="btn btn-primary">Create Post</a>
+</div>
+
+<table class="table table-hever">
+    @*<table class="table">*@
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">CreateOn</th>
+            <th scope="col">User</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var post in this.Model)
+            {
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@post.Title</td>
+                    <td>@post.Content</td>
+                    <td>@post.CreatedOn</td>
+                    <td>@post.User.Username</td>
+                    <td>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">Details</a>
+                        <br />
+                        <a asp-controller="Posts" asp-action="Edit" asp-route-id="@post.Id">Edit</a>
+                        <br />
+                        <a asp-controller="Posts" asp-action="Delete" asp-route-id="@post.Id">Delete</a>
+                    </td>
+                </tr>
+                count += 1;
+            }
+
+        }
+    </tbody>
+</table>
+

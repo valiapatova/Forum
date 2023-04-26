@@ -1,0 +1,32 @@
+﻿@{
+    this.ViewData["Title"] = "Details";
+}
+@model Post 
+
+<h2>@this.Model.Title</h2>
+
+<p class="margin12"><b>Content:</b><br /> @this.Model.Content</p>
+<p class="margin12"><b>Author:</b> @this.Model.User.FirstName @this.Model.User.LastName</p>
+<p class="margin12"><b>Author's email:</b> @this.Model.User.Email</p>
+<p class="margin12"><b>Added on:</b> @this.Model.CreatedOn</p>
+
+<h4>Comments</h4>
+
+<ul>
+
+    @{
+        foreach (var comment in this.Model.Comments)
+        {
+            <li class="margin12">@comment.Content</li>
+        }
+    }
+
+</ul>
+
+@*<input type="button" value="Add comment"/>*@
+
+<a asp-controller="Comments" asp-action="Create" asp-route-postId="@Model.Id" class="btn btn-outline-success">Add Comment</a>
+<p></p>
+<br/>
+<a href="/posts/" class="nav">Go Back</a>
+

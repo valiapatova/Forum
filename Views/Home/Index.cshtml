@@ -1,0 +1,51 @@
+﻿@{
+    this.ViewData["Title"] = "Home";
+}
+
+<h2>Hi @Context.Session.GetString("CurrentUser"),</h2>
+<h3>Welcome to our Forum</h3>
+
+@model IEnumerable<Post>
+
+
+<center><h4><font color="blue">Here are the latest posts. To see all posts, please</font> <font color="green">Login</font> </h4></center>
+
+
+
+    <table class="table table-hever">
+        @*<table class="table">*@
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">CreateOn</th>
+                <th scope="col">User</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var post in this.Model)
+                {
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@post.Title</td>
+                        <td>@post.Content</td>
+                        <td>@post.CreatedOn</td>
+                        <td>@post.User.Username</td>
+                        @*                    <td>
+                                <a asp-controller="Beers" asp-action="Details" asp-route-id="@beer.Id">Details</a>
+                                <br />
+                                <a asp-controller="Beers" asp-action="Edit" asp-route-id="@beer.Id">Edit</a>
+                            </td>*@
+                    </tr>
+                    count += 1;
+                }
+
+            }
+        </tbody>
+    </table>
+
+    <!-- <img src="~/images/logo.png" /> -->

@@ -1,0 +1,66 @@
+﻿@{
+    this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUser");
+    this.ViewData["CurrentUser"] = this.Context.Session.GetString("CurrentUser");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Forum - @this.ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">BeerOverflow</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link text-dark">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Beers" asp-action="Index" class="nav-link text-dark">Beers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="About" class="nav-link text-dark">About</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (!(bool)this.ViewData["IsAuthenticated"])
+                            {
+                                <a asp-controller="Auth" asp-action="Login" class="nav-link text-dark">Login</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Auth" asp-action="Logout" class="nav-link text-dark">Logout</a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <small>© Copyright @DateTime.Now.Year, Forum</small>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

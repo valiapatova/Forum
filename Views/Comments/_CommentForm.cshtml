@@ -1,0 +1,13 @@
+﻿@model CommentViewModel
+@*<form href="/Posts/Create" method="post">*@
+@*<form asp-controller="Posts" asp-action="@this.ViewData["Action"]" method="post">*@
+
+<form asp-controller="Comments" asp-action="@this.ViewData["Action"]" method="@this.ViewData["PostsMethod"]">
+    <div class="form-group" style="display: @this.ViewData["PostFormVisibility"]">
+        <label asp-for="Content"></label>
+        <input type="text" asp-for="Content" class="form-control" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="@this.ViewData["SubmitButton"]" class="btn btn-success" />
+</form>

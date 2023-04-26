@@ -1,0 +1,15 @@
+﻿@{
+    this.ViewData["Title"] = "Delete";
+    this.ViewData["Action"] = "Delete";
+    this.ViewData["SubmitButton"] = "Confirm Delete";
+    this.ViewData["PostFormVisibility"] = "none";
+    this.ViewData["PostsMethod"] = "post";
+}
+
+@model PostViewModel
+
+<h2>@this.Model.Title</h2>
+<br/>
+<h4>@this.Model.Content</h4>
+
+<partial name="_PostForm" />

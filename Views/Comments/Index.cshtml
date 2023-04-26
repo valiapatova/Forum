@@ -1,0 +1,53 @@
+﻿@{
+    this.ViewData["Title"] = "Comments";
+}
+
+<h2>Hi @Context.Session.GetString("CurrentUser"),</h2>
+<h3>Welcome to our Forum</h3>
+
+@model IEnumerable<Comment>
+
+
+<h2>Comments</h2>
+
+<!--<div>-->
+    @*<a href="/Posts/Create" class="btn btn-primary">Create Post</a>*@
+    <!--<a asp-controller="Posts" asp-action="Create" class="btn btn-primary">Create Post</a>
+</div>-->
+
+<table class="table table-hever">
+    @*<table class="table">*@
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>           
+            <th scope="col">Content</th>            
+            <th scope="col">Autor</th>
+            <th scope="col">PostTitle</th>
+            <th scope="col">PostContent</th>
+            @*<th scope="col">Actions</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var comment in this.Model)
+            {
+                <tr>
+                    <th scope="row">@count</th>                    
+                    <td>@comment.Content</td>
+                    <td>@comment.User.Username</td>
+                    <td>@comment.Post.Title</td>
+                    <td>@comment.Post.Content</td>
+                    
+                    <td>              
+                        <a asp-controller="Comments" asp-action="Edit" asp-route-id="@comment.Id">Edit</a>
+                        <br />
+                        <a asp-controller="Posts" asp-action="Delete" asp-route-id="@comment.Id">Delete</a>
+                    </td>
+                </tr>
+                count += 1;
+            }
+
+        }
+    </tbody>
+</table>
